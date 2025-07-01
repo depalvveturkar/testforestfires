@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dipal's Forest Fire Prediction</title>
+</head>
+<body>
+    <h2>🔥 Enter Input Details to Predict FWI</h2>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+        <label>Temperature:</label><br>
+        <input type="text" name="Temperature" required><br><br>
+
+        <label>RH (Relative Humidity):</label><br>
+        <input type="text" name="RH" required><br><br>
+
+        <label>Ws (Wind Speed):</label><br>
+        <input type="text" name="Ws" required><br><br>
+
+        <label>Rain:</label><br>
+        <input type="text" name="Rain" required><br><br>
+
+        <label>FFMC:</label><br>
+        <input type="text" name="FFMC" required><br><br>
+
+        <label>DMC:</label><br>
+        <input type="text" name="DMC" required><br><br>
+
+        <label>ISI:</label><br>
+        <input type="text" name="ISI" required><br><br>
+
+        <label>Classes (0 or 1):</label><br>
+        <input type="text" name="Classes" required><br><br>
+
+        <label>Region (1 or 2):</label><br>
+        <input type="text" name="Region" required><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction is not none %}
+        <h3>🌲 The FWI prediction is: <strong>{{ prediction }}</strong></h3>
+    {% endif %}
+</body>
+</html>
