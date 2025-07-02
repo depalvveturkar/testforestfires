@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 882491246127.dkr.ecr.ap-south-1.amazonaws.com
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t simple-docker-service .
+  post_build:
+    commands:
+      - echo Tagging image...
+      - docker tag simple-docker-service:latest 882491246127.dkr.ecr.ap-south-1.amazonaws.com/simple-docker-service:latest
+      - echo Pushing image...
+      - docker push 882491246127.dkr.ecr.ap-south-1.amazonaws.com/simple-docker-service:latest
+
+artifacts:
+  files:
+    - '**/*'
